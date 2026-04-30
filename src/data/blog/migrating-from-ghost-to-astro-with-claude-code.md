@@ -32,6 +32,14 @@ We wrote the plan first — a single Markdown document — then asked Claude Cod
 
 Total wall-clock time, from "let's do this" to "site is built and ready to deploy": a few hours. The agent flagged decisions that needed a human (which header text to use, which 23 LinkedIn-hosted images had expired signed URLs we'd need to replace by hand) and kept moving on the rest.
 
+## What's under the hood
+
+Every article on this site — including the one you're reading — is a plain [Markdown](https://en.wikipedia.org/wiki/Markdown) file in a Git repository. No database, no admin panel, no login screen. Editing a post is just editing a text file.
+
+When we push a change to the `main` branch, [GitHub Actions](https://github.com/features/actions) automatically builds the site and publishes the new version to [GitHub Pages](https://pages.github.com/). No manual deploy step. No "did I remember to click publish?" The article you're reading went live the same way.
+
+The whole repository is public. If you'd like to see how the site is built, browse the source, or borrow the migration script for your own move off Ghost, the code is at [github.com/miller-databases/website](https://github.com/miller-databases/website). Pull requests welcome.
+
 ## Why this matters for our clients
 
 This wasn't a stunt. It was a small, real example of how we're working now.
