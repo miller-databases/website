@@ -2,7 +2,7 @@
 title: Build your own C# code analyzer
 author: Daniel Miller
 pubDatetime: 2025-07-20T23:36:00.000Z
-modDatetime: 2025-09-23T02:03:06.000Z
+modDatetime: 2025-07-20T23:36:00.000Z
 featured: false
 draft: false
 tags:

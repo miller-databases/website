@@ -2,7 +2,7 @@
 title: Extract time entry worklogs from Jira and Tempo with .NET API integration
 author: Daniel Miller
 pubDatetime: 2025-05-26T03:16:55.000Z
-modDatetime: 2025-09-23T01:56:45.000Z
+modDatetime: 2025-05-26T03:16:55.000Z
 featured: false
 draft: false
 tags:

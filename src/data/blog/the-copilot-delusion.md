@@ -2,7 +2,7 @@
 title: The Copilot Delusion
 author: Daniel Miller
 pubDatetime: 2025-06-21T22:56:00.000Z
-modDatetime: 2025-08-04T17:17:57.000Z
+modDatetime: 2025-06-21T22:56:00.000Z
 featured: false
 draft: false
 tags:

@@ -2,7 +2,7 @@
 title: Automate your website content migration with the Ghost Admin API
 author: Daniel Miller
 pubDatetime: 2025-06-25T17:10:00.000Z
-modDatetime: 2025-09-23T02:07:21.000Z
+modDatetime: 2025-06-25T17:10:00.000Z
 featured: false
 draft: false
 tags:

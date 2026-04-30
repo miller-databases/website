@@ -2,7 +2,7 @@
 title: Color-coding folders in VS Code
 author: Daniel Miller
 pubDatetime: 2025-07-17T04:32:00.000Z
-modDatetime: 2025-08-04T17:34:11.000Z
+modDatetime: 2025-07-17T04:32:00.000Z
 featured: false
 draft: false
 tags:

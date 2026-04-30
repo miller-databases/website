@@ -2,6 +2,7 @@
 title: Auditing data types and column sizes in SQL Server
 author: Daniel Miller
 pubDatetime: 2025-07-14T15:22:40.000Z
+modDatetime: 2025-07-14T15:22:40.000Z
 featured: false
 draft: false
 tags:

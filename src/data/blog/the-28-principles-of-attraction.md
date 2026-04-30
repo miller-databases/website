@@ -2,7 +2,7 @@
 title: The 28 principles of attraction
 author: Daniel Miller
 pubDatetime: 2025-05-23T01:25:00.000Z
-modDatetime: 2025-08-04T16:22:32.000Z
+modDatetime: 2025-05-23T01:25:00.000Z
 featured: false
 draft: false
 tags:

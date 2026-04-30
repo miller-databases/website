@@ -2,7 +2,7 @@
 title: How do you build a fast, lightweight solution for CQRS and event sourcing?
 author: Daniel Miller
 pubDatetime: 2025-06-30T02:11:00.000Z
-modDatetime: 2025-09-23T02:04:28.000Z
+modDatetime: 2025-06-30T02:11:00.000Z
 featured: false
 draft: false
 tags:

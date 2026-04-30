@@ -2,7 +2,7 @@
 title: The high cost of low software estimates
 author: Daniel Miller
 pubDatetime: 2025-05-21T12:44:31.000Z
-modDatetime: 2025-08-04T16:38:46.000Z
+modDatetime: 2025-05-21T12:44:31.000Z
 featured: false
 draft: false
 tags:

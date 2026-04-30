@@ -2,7 +2,7 @@
 title: Structuring documentation that scales
 author: Daniel Miller
 pubDatetime: 2025-06-15T14:41:30.000Z
-modDatetime: 2025-09-23T02:05:48.000Z
+modDatetime: 2025-06-15T14:41:30.000Z
 featured: false
 draft: false
 tags:

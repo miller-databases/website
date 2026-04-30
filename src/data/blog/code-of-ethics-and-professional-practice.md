@@ -2,7 +2,7 @@
 title: Code of ethics and professional practice
 author: Daniel Miller
 pubDatetime: 2025-05-20T12:59:07.000Z
-modDatetime: 2025-08-04T16:40:41.000Z
+modDatetime: 2025-05-20T12:59:07.000Z
 featured: false
 draft: false
 tags:

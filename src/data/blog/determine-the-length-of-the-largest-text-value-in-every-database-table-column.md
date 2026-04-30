@@ -2,7 +2,7 @@
 title: Determine the length of the largest text value in every database table column
 author: Daniel Miller
 pubDatetime: 2025-05-24T02:48:04.000Z
-modDatetime: 2025-08-04T16:20:25.000Z
+modDatetime: 2025-05-24T02:48:04.000Z
 featured: false
 draft: false
 tags:

@@ -2,7 +2,7 @@
 title: Headless software is a growing trend
 author: Daniel Miller
 pubDatetime: 2025-07-02T17:55:00.000Z
-modDatetime: 2025-08-04T17:29:10.000Z
+modDatetime: 2025-07-02T17:55:00.000Z
 featured: false
 draft: false
 tags:
