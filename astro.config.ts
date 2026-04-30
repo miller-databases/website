@@ -17,6 +17,9 @@ export default defineConfig({
   integrations: [
     sitemap({
       filter: page => SITE.showArchives || !page.endsWith("/archives"),
+      serialize(item) {
+        return { ...item, lastmod: new Date().toISOString() };
+      },
     }),
   ],
   markdown: {
