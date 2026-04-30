@@ -24,7 +24,7 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
   <main id="main-content" data-layout="index" class="app-layout">
     <section id="hero" class:list={["pt-8 pb-6", "border-b border-border"]}>
       <h1 class="my-4 inline-block text-4xl font-bold sm:my-8 sm:text-5xl">
-        Mingalaba
+        Field notes
       </h1>
       <a
         target="_blank"
@@ -42,19 +42,24 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
       </a>
 
       <p>
-        AstroPaper is a minimal, responsive, accessible and SEO-friendly Astro
-        blog theme. This theme follows best practices and provides accessibility
-        out of the box. Light and dark mode are supported by default. Moreover,
-        additional color schemes can also be configured.
+        Working notes on database administration, performance tuning, and the
+        software practices that keep data systems healthy. Written from the seat
+        of a practicing consultant — what we tried, what broke, what we'd do
+        differently.
       </p>
       <p class="mt-2">
-        Read the blog posts or check
+        Browse the
         <LinkButton
           class="underline decoration-dashed underline-offset-4 hover:text-accent"
-          href="https://github.com/satnaing/astro-paper#readme"
+          href="/posts/"
         >
-          README
-        </LinkButton> for more info.
+          posts
+        </LinkButton> or get in touch at <LinkButton
+          class="underline decoration-dashed underline-offset-4 hover:text-accent"
+          href="mailto:daniel@millerdatabases.com"
+        >
+          daniel@millerdatabases.com
+        </LinkButton>.
       </p>
       {
         // only display if at least one social link is enabled
