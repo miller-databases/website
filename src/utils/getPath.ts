@@ -11,7 +11,7 @@ import { slugifyStr } from "./slugify";
 export function getPath(
   id: string,
   filePath: string | undefined,
-  includeBase = true
+  includeBase = false
 ) {
   const pathSegments = filePath
     ?.replace(BLOG_PATH, "")
