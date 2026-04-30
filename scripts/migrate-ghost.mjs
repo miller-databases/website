@@ -57,15 +57,13 @@ function resolveGhostUrl(u) {
   return u;
 }
 
-function isImageUrl(u) {
-  return /\.(jpe?g|png|gif|webp|svg|avif|ico|bmp)(\?|$)/i.test(u);
-}
-
 function basenameFromUrl(u, fallback = "image") {
   try {
     const url = new URL(u);
-    const base = path.basename(url.pathname).split("?")[0] || fallback;
-    return base.replace(/[^\w.\-]/g, "_") || fallback;
+    let base = path.basename(url.pathname).split("?")[0] || fallback;
+    base = base.replace(/[^\w.\-]/g, "_") || fallback;
+    if (!/\.[a-z0-9]{2,5}$/i.test(base)) base += ".jpg";
+    return base;
   } catch {
     return fallback;
   }
@@ -154,7 +152,6 @@ function makeTurndown() {
       const emoji = node.querySelector(".kg-callout-emoji")?.textContent.trim() || "";
       const text = node.querySelector(".kg-callout-text")?.textContent.trim() || node.textContent.trim();
       const prefix = emoji ? `${emoji} ` : "";
-      const lines = text.split(/\n+/).map((l) => `> ${prefix}${l}`.trim()).join("\n> ");
       return `\n\n> ${prefix}${text}\n\n`;
     },
   });
@@ -276,15 +273,12 @@ async function main() {
       downloads.push({ url, dest, slug });
     }
 
-    // Feature image (for ogImage).
-    let ogImagePath = null;
+    // Feature image (for ogImage). Queue download; URL rewritten in second pass.
     const featureUrl = resolveGhostUrl(post.feature_image || post.og_image);
     if (featureUrl) {
-      let featBase = basenameFromUrl(featureUrl, "cover");
-      if (!/\.[a-z0-9]+$/i.test(featBase)) featBase += ".jpg";
+      const featBase = basenameFromUrl(featureUrl, "cover");
       const dest = path.join(slugAssetsDir, featBase);
       downloads.push({ url: featureUrl, dest, slug });
-      ogImagePath = `../../assets/images/posts/${slug}/${featBase}`;
     }
 
     // Convert.
@@ -296,15 +290,7 @@ async function main() {
       failed.push({ slug, reason: e.message });
       continue;
     }
-
-    // Rewrite remote image URLs to local relative paths.
-    const rel = `../../assets/images/posts/${slug}`;
-    for (const url of seen) {
-      const filename = basenameFromUrl(url, "image");
-      // Escape for regex.
-      const esc = url.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
-      md = md.replace(new RegExp(esc, "g"), `${rel}/${filename}`);
-    }
+    // (URL rewrite happens after downloads, so failed images keep their original URL.)
 
     // Tags.
     const postTags = (tagsByPost.get(post.id) || [])
@@ -325,7 +311,7 @@ async function main() {
       featured: !!post.featured,
       draft: false,
       tags,
-      ...(ogImagePath ? { ogImage: ogImagePath } : {}),
+      ...(featureUrl ? { ogImage: featureUrl } : {}),
       description: makeDescription(post),
       ...(post.canonical_url ? { canonicalURL: post.canonical_url } : {}),
     };
@@ -338,25 +324,55 @@ async function main() {
     log(`✓ ${slug}.md`);
   }
 
-  // Download all queued images. Dedupe by dest path.
-  const byDest = new Map();
-  for (const d of downloads) if (!byDest.has(d.dest)) byDest.set(d.dest, d);
-  log(`\nDownloading ${byDest.size} images…`);
-  for (const { url, dest, slug } of byDest.values()) {
-    if (fss.existsSync(dest)) { summary.images++; continue; }
+  // Download all queued images. Dedupe by url+dest.
+  const byKey = new Map();
+  for (const d of downloads) {
+    const k = d.url + "|" + d.dest;
+    if (!byKey.has(k)) byKey.set(k, d);
+  }
+  log(`\nDownloading ${byKey.size} images…`);
+  // url -> relative path (only set on success)
+  const successByUrl = new Map();
+  for (const { url, dest, slug } of byKey.values()) {
+    const rel = `../../assets/images/posts/${slug}/${path.basename(dest)}`;
+    if (fss.existsSync(dest)) {
+      summary.images++;
+      successByUrl.set(url, rel);
+      continue;
+    }
     try {
       await fetchWithRetry(url, dest);
       summary.images++;
+      successByUrl.set(url, rel);
     } catch (e) {
       warn(`Failed: ${url} -> ${dest}: ${e.message}`);
       failed.push({ slug, url, reason: e.message });
     }
   }
 
+  // Second pass: rewrite remote URLs in MD files to local paths (only successful ones).
+  log(`\nRewriting URLs in markdown…`);
+  const mdFiles = (await fs.readdir(BLOG_DIR)).filter((f) => f.endsWith(".md"));
+  let rewriteCount = 0;
+  for (const f of mdFiles) {
+    const p = path.join(BLOG_DIR, f);
+    let body = await fs.readFile(p, "utf8");
+    let changed = false;
+    for (const [url, rel] of successByUrl) {
+      if (body.includes(url)) {
+        const esc = url.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+        body = body.replace(new RegExp(esc, "g"), rel);
+        changed = true;
+      }
+    }
+    if (changed) { await fs.writeFile(p, body); rewriteCount++; }
+  }
+  log(`  rewrote ${rewriteCount} files`);
+
   log("\nSummary:");
   log(`  posts written:   ${summary.posts}`);
   log(`  posts skipped:   ${summary.skipped}`);
-  log(`  images saved:    ${summary.images}/${byDest.size}`);
+  log(`  images saved:    ${summary.images}/${byKey.size}`);
   log(`  embeds flagged:  ${EMBED_NOTES.length}`);
   if (EMBED_NOTES.length) EMBED_NOTES.forEach((u) => log(`    embed: ${u}`));
   if (failed.length) {
