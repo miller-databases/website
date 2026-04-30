@@ -1,0 +1,23 @@
+export const SITE = {
+  website: "https://www.millerdatabases.com/",
+  author: "Daniel Miller",
+  profile: "https://www.millerdatabases.com/",
+  desc: "Professional database software services",
+  title: "Miller Databases",
+  ogImage: "astropaper-og.jpg",
+  lightAndDarkMode: true,
+  postPerIndex: 4,
+  postPerPage: 4,
+  scheduledPostMargin: 15 * 60 * 1000,
+  showArchives: true,
+  showBackButton: true,
+  editPost: {
+    enabled: false,
+    text: "Edit page",
+    url: "https://github.com/miller-databases/website/edit/main/",
+  },
+  dynamicOgImage: true,
+  dir: "ltr",
+  lang: "en",
+  timezone: "America/Denver",
+} as const;
