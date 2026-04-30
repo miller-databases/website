@@ -4,7 +4,6 @@ export const SITE = {
   profile: "https://www.millerdatabases.com/",
   desc: "Professional database software services",
   title: "Miller Databases",
-  ogImage: "astropaper-og.jpg",
   lightAndDarkMode: true,
   postPerIndex: 4,
   postPerPage: 4,
