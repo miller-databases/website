@@ -15,7 +15,7 @@ Recently we migrated over a hundred pages from a custom website content manageme
 
 ## Why Ghost?
 
-In a [previous article](https://www.linkedin.com/pulse/structuring-documentation-scales-daniel-miller-yyr7c), I mentioned [Ghost](https://ghost.org/) as part of my software system documentation initiative. Last week we took the first steps by migrating over a hundred pages and blog posts from a custom web site content management system into the Ghost platform.
+In a [previous article](/posts/structuring-documentation-that-scales/), I mentioned [Ghost](https://ghost.org/) as part of my software system documentation initiative. Last week we took the first steps by migrating over a hundred pages and blog posts from a custom web site content management system into the Ghost platform.
 
 Ghost is an open-source content management system that is especially well-suited to web sites with a blog or newsletter focus, and its [Admin API](https://ghost.org/docs/admin-api/) provides an excellent set of tools for bulk-import of content from other sites and systems.
 
@@ -24,8 +24,6 @@ My team created a simple [Extract, Transform, Load](https://en.wikipedia.org/wik
 ## A simple two-step migration
 
 The migration process is a simple two-step.
-
-![](https://media.licdn.com/dms/image/v2/D5612AQEzy48cWb1LYw/article-inline_image-shrink_1500_2232/B56ZeZlMTsGoAY-/0/1750628353522?e=1759968000&v=beta&t=FZ-p-tpNkTFwYAyY6RF_KMRCDMCuUdezbrvrW-KbkmA)
 
 ### Step 1: Export your existing content
 
@@ -70,8 +68,6 @@ dotnet run --project src -- import-pages --url <ghost-url> --key <staff-token> -
 
 The programming is easy to understand. The main part of the logic is implemented in one simple method that looks like this:
 
-![](https://media.licdn.com/dms/image/v2/D5612AQELGdsafECc9A/article-inline_image-shrink_1000_1488/B56ZeYtqE7HUAQ-/0/1750613795555?e=1759968000&v=beta&t=l9OO7Vl5baLa5D3VdMHUWYLTn7LyDep78d_crgW6HQE)
-
 I battle-tested this code with a site that contains more than 7000 pages, and it worked flawlessly, so the odds are good that it can handle whatever you want to throw at it.
 
 It is important to note the Ghost Admin API endpoint for creating a new page requires a list of items, rather than a single item, which means you can migrate pages individually or in batches.
@@ -105,7 +101,3 @@ Fair warning: it isn't plug-and-play. You’ll need to look after Step One yours
 If you need a hand getting your content loaded into a Ghost-powered site then send me a note. And, of course, you can create a fork of my GitHub repository and make the project your own.
 
 #GhostCMS #ContentMigration #DotNetDevelopers #CommandLineTools #ETL #BuildInPublic
-
----
-
-This article was originally posted on LinkedIn: [https://www.linkedin.com/pulse/automate-your-website-content-migration-ghost-admin-api-daniel-miller-lksyc](https://www.linkedin.com/pulse/automate-your-website-content-migration-ghost-admin-api-daniel-miller-lksyc)

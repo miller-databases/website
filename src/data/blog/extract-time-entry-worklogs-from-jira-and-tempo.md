@@ -47,12 +47,7 @@ var list = entries.OrderBy(x => x.Date)
 BuildReports(list);
 ```
 
-Get the source code here:  
+Get the source code here:
 🔗 [https://github.com/daniel-miller/jira-tempo-integration](https://github.com/daniel-miller/jira-tempo-integration)
 
 If you need a hand trying to get that _one_ report out from your Jira and Tempo setup then drop me a note. Or create your own fork of the repository on GitHub and make it your own!
-
----
-
-This article was originally posted on LinkedIn:  
-[https://www.linkedin.com/pulse/making-jira-tempo-work-you-how-extract-time-entry-worklogs-miller-r1lqc](https://www.linkedin.com/pulse/making-jira-tempo-work-you-how-extract-time-entry-worklogs-miller-r1lqc)

@@ -1,5 +1,5 @@
 ---
-title: We moved this site from Ghost to Astro — in an afternoon, with an AI agent
+title: We moved this site from Ghost to Astro — in an afternoon, using an AI agent
 author: Daniel Miller
 pubDatetime: 2026-04-30T18:00:00.000Z
 modDatetime: 2026-04-30T18:00:00.000Z
@@ -11,7 +11,7 @@ tags:
 description: Today we migrated millerdatabases.com from Ghost to a static Astro site, with a Claude Code agent doing most of the keystroking. Here's how it went.
 ---
 
-If you're a regular reader, you may notice the site looks a little different today. We've moved millerdatabases.com off of [Ghost](https://ghost.org/) and onto a static site built with [Astro](https://astro.build/). The content is the same; the plumbing is simpler, faster, and cheaper to operate.
+If you're a regular reader, you may notice the site looks a little different today. We moved millerdatabases.com from [Ghost](https://ghost.org/) to a static site built with [Astro](https://astro.build/). The content is the same; the plumbing is simpler, faster, and cheaper to operate.
 
 What might surprise you: most of the migration work wasn't done by hand. We handed the job to an AI coding agent — [Claude Code](https://www.anthropic.com/claude-code) — and supervised.
 
@@ -30,7 +30,7 @@ We approached this like any other client engagement. The work broke down into ei
 
 We wrote the plan first — a single Markdown document — then asked Claude Code to follow it. The agent did the typing: reading the Ghost export, writing the migration script, running it, fixing the broken edges, committing each phase, building, and re-running until everything was green.
 
-Total wall-clock time, from "let's do this" to "site is built and ready to deploy": a few hours. The agent flagged decisions that needed a human (which header text to use, which 23 LinkedIn-hosted images had expired signed URLs we'd need to replace by hand) and kept moving on the rest.
+Total wall-clock time, from "let's do this" to "site is built and deployed": a few hours. The agent flagged decisions that needed a human (which header text to use, which images had expired signed URLs we'd need to replace by hand) and kept moving on the rest.
 
 ## What's under the hood
 
@@ -44,10 +44,8 @@ The whole repository is public. If you'd like to see how the site is built, brow
 
 This wasn't a stunt. It was a small, real example of how we're working now.
 
-Miller Databases is increasingly leaning on **agentic programming** — AI agents that don't just suggest snippets but actually execute the boring, structured parts of software work — to deliver faster and at lower cost for our clients. Database migrations, ETL utilities, code analyzers, schema audits, integration scripts: the kind of work that used to mean a week of careful keystrokes can often now be planned, executed, and reviewed in a fraction of the time.
+Miller Databases is increasingly leaning on **agentic programming** — AI agents that don't just suggest snippets but actually execute the boring, structured parts of software work — carefully guided by a senior developer - to deliver faster and at lower cost for our clients. Database migrations, ETL utilities, code analyzers, schema audits, integration scripts: the kind of work that once required a week of typing can now be planned, executed, and reviewed in a fraction of the time.
 
-The role of the consultant doesn't go away. It shifts. We spend less time typing boilerplate and more time on the parts that actually require judgement: understanding the business problem, designing the right approach, and verifying that the result holds up.
+The role of the consultant doesn't go away. It shifts. We spend less time typing boilerplate and more time on the parts that actually require judgement: understanding the business problem, designing the right approach, and verifying the result.
 
-If you have a database project that's been sitting in the "someday" column because it looked like too much effort, this is a good moment to ask us about it. The math has changed.
-
-— Daniel
+If you have a database project that's been sitting in the "someday" column because it looked like too much effort, this is a good time to ask us about it.

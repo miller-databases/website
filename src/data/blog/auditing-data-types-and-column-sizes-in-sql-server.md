@@ -165,7 +165,3 @@ When your platform grows, the consequences of poor and uninformed decisions echo
 When was the last time you did an audit of the text columns in your SQL Server database? You might be surprised by the positive impact of a small, well-informed change. And a few hours of analysis today could save you days of troubleshooting tomorrow!
 
 #DatabaseDesign #DataIntegrity #Scalability #SoftwareArchitecture #PerformanceOptimization
-
----
-
-This article was originally posted on LinkedIn. [https://www.linkedin.com/pulse/why-we-routinely-audit-data-types-sizes-sql-server-you-daniel-miller-2em9c](https://www.linkedin.com/pulse/why-we-routinely-audit-data-types-sizes-sql-server-you-daniel-miller-2em9c)

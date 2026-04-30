@@ -237,7 +237,7 @@ The other four assemblies (_Sample.\*_) implement the layers in a console applic
 
 The project dependency diagram is illustrated here:
 
-![](https://media.licdn.com/dms/image/v2/D5612AQHgUbZZ9SMLVQ/article-inline_image-shrink_1500_2232/B56Zec2NNzH8AY-/0/1750683145349?e=1759968000&v=beta&t=qM73mJoEv5mYoWgqBamaqM3WR8c39IsqQo0Ei6ArcR4)
+![](../../assets/images/posts/how-do-you-build-a-fast-lightweight-solution-for-cqrs-and-event-sourcing/figure-1.png)
 
 ### Sample Projects
 
@@ -247,7 +247,7 @@ Also notice the domain-centric approach: the Domain layer has no dependencies on
 
 The entity relationship diagram for the sample domain is illustrated in Figure 2:
 
-![](https://media.licdn.com/dms/image/v2/D5612AQHFnCd1lOePCw/article-inline_image-shrink_1000_1488/B56Zec2Sd5G0AQ-/0/1750683166855?e=1759968000&v=beta&t=t541u_EkS26dEDnwknQcRdP_J0gfm4APCdpstkCQYKg)
+![](../../assets/images/posts/how-do-you-build-a-fast-lightweight-solution-for-cqrs-and-event-sourcing/figure-2.png)
 
 In this basic data model:
 
@@ -261,7 +261,7 @@ Keep in mind: every Person, Account, and Transfer is an aggregate root, therefor
 
 The overall approach to CQRS+ES in this solution is illustrated in Figure 3:
 
-![](https://media.licdn.com/dms/image/v2/D5612AQFvWoUwd4UVng/article-inline_image-shrink_1000_1488/B56Zec2YvZG0AY-/0/1750683192757?e=1759968000&v=beta&t=NgaSF1h0f7Ev-yjr46STDqnJjP1TtRYX1lZ0vGHqaV8)
+![](../../assets/images/posts/how-do-you-build-a-fast-lightweight-solution-for-cqrs-and-event-sourcing/figure-3.png)
 
 Notice the Write Side (Commands) and Read Side (Queries) are well-delineated.
 
@@ -310,13 +310,13 @@ public static void Run(ICommandQueue commander)
 
 Following this run the read-side projection looks good, just as expected:
 
-![](https://media.licdn.com/dms/image/v2/D5612AQGeLpIAg5xuRQ/article-inline_image-shrink_400_744/B56Zec2rY9HUAc-/0/1750683268944?e=1759968000&v=beta&t=OIrdcbuV7pVU72XYufB_HxVabud7EARVu864Z393olA)
+![](../../assets/images/posts/how-do-you-build-a-fast-lightweight-solution-for-cqrs-and-event-sourcing/figure-4.png)
 
 ### Data Flow
 
 The steps performed by the system in this scenario are illustrated in the following diagram:
 
-![](https://media.licdn.com/dms/image/v2/D5612AQHla_hw7vj0ww/article-inline_image-shrink_1500_2232/B56Zec2u5yHQAk-/0/1750683283476?e=1759968000&v=beta&t=OhQey40VjJfcnjV1L4HNFFkTzOCuq2VzX8od20PFVwA)
+![](../../assets/images/posts/how-do-you-build-a-fast-lightweight-solution-for-cqrs-and-event-sourcing/figure-5.png)
 
 ### Scenario B: How to Take a Snapshot of an Aggregate
 
@@ -336,7 +336,7 @@ public static void Run(ICommandQueue commander)
 
 As expected, we have a snapshot at version 20, and the current-state projection after event number 21:
 
-![](https://media.licdn.com/dms/image/v2/D5612AQEecr1NBLfHqg/article-inline_image-shrink_1500_2232/B56Zec25NxG0Ag-/0/1750683325735?e=1759968000&v=beta&t=7YJalHrU79U_1KSe4ocmJ-jlW-iQe0ZuyqE0thKTHhg)
+![](../../assets/images/posts/how-do-you-build-a-fast-lightweight-solution-for-cqrs-and-event-sourcing/figure-6.png)
 
 ### Scenario C: How to Take an Aggregate Offline
 
@@ -365,7 +365,7 @@ public static void Run(ICommandQueue commander)
 
 As you can see, the aggregate no longer exists in the event store, and an offline copy of the final snapshot (along with the entire event stream) has been made on the file system.
 
-![](https://media.licdn.com/dms/image/v2/D5612AQGFm7Xn014mqw/article-inline_image-shrink_1000_1488/B56Zec2_2HH8AU-/0/1750683352951?e=1759968000&v=beta&t=MqtRoikOObET4LXdhJwKsUxP9hs9_Zs3eiMhNnvtSVA)
+![](../../assets/images/posts/how-do-you-build-a-fast-lightweight-solution-for-cqrs-and-event-sourcing/figure-7.png)
 
 ### Scenario D: How to Create a New User With a Unique Login Name
 
@@ -391,7 +391,7 @@ The next test run shows one way (but not the only way) to create a new user with
 
 In this scenario, the trick is to realize that you do in fact need a _saga_ (or _process manager_, as I prefer to call it). Creating a new user account is not a single-step operation; it is a process, and therefore requires coordination. The flowchart (or _state machine_, if you prefer) might be very complex in your application, but even in the simplest of all possible cases, it looks something like this:
 
-![](https://media.licdn.com/dms/image/v2/D5612AQELI6qYEenD5A/article-inline_image-shrink_1500_2232/B56Zec36GwHUAY-/0/1750683591447?e=1759968000&v=beta&t=J5WuhnxuuMGrQ5MDui0f_wIzLNoaHA-xZ5CrQvMYy3Y)
+![](../../assets/images/posts/how-do-you-build-a-fast-lightweight-solution-for-cqrs-and-event-sourcing/figure-8.png)
 
 The code that relies on a process manager to implement this functionality is shown in the next figure:
 
@@ -403,7 +403,7 @@ public void Run()
 
     if (RegisterUser(Guid.NewGuid(), login, password)) // succeeds.
         System.Console.WriteLine($"User registration for {login} succeeded");
-    
+
     if (!RegisterUser(Guid.NewGuid(), login, password)) // fails; duplicate login.
         System.Console.WriteLine($"User registration for {login} failed");
 }
@@ -426,7 +426,7 @@ private bool RegisterUser(Guid id, string login, string password)
     }
     else
     {
-        var error = $"Registration for {login} has not completed after 
+        var error = $"Registration for {login} has not completed after
                     {waitTime * maximumRetries} ms";
         throw new IncompleteUserRegistrationException(error);
     }
@@ -473,7 +473,7 @@ public class UserRegistrationProcessManager
     {
         // Registration succeeds only if no other user has the same login name.
         var status = _querySearch
-            .UserExists(u => u.LoginName == e.Name 
+            .UserExists(u => u.LoginName == e.Name
 			    && u.UserIdentifier != e.AggregateIdentifier)
             ? "Failed" : "Succeeded";
 
@@ -490,7 +490,7 @@ There you have a basic, reactive saga that flags inactivate accounts created wit
 
 As expected, the first registration succeeds and the second fails:
 
-![](https://media.licdn.com/dms/image/v2/D5612AQGXgrpcL4_vbA/article-inline_image-shrink_400_744/B56Zec3j2jHUAg-/0/1750683500241?e=1759968000&v=beta&t=8W0p9BT00XpCYme47f4wLeC7nmeDLBUECMOasgHf6EU)
+![](../../assets/images/posts/how-do-you-build-a-fast-lightweight-solution-for-cqrs-and-event-sourcing/figure-9.png)
 
 ### Scenario E: How to Schedule a Command
 
@@ -510,7 +510,7 @@ public static void Run(ICommandQueue commander)
 
 Notice this creates no aggregate in the event log, and the command log now contains a scheduled entry:
 
-![](https://media.licdn.com/dms/image/v2/D5612AQH5rQn02_8QvQ/article-inline_image-shrink_400_744/B56Zec3pF0HoAc-/0/1750683521704?e=1759968000&v=beta&t=jkC0f06c6oF0vcW5qYuu4Xy_JukICx5AC9v5-XxgQWE)
+![](../../assets/images/posts/how-do-you-build-a-fast-lightweight-solution-for-cqrs-and-event-sourcing/figure-10.png)
 
 ### Scenario F: How to Update Multiple Aggregates With One Command
 
@@ -538,7 +538,7 @@ In this scenario, the trick is to realize you need another aggregate root - i.e.
 
 The simplest possible flowchart is illustrated in the next figure. (An accounting system obviously needs something more sophisticated than this.)
 
-![](https://media.licdn.com/dms/image/v2/D5612AQFiMs7djvI0SQ/article-inline_image-shrink_400_744/B56Zec4CNZHQAg-/0/1750683624567?e=1759968000&v=beta&t=SZ_bJ5iO80B8LG7vT1oJ--XaiGMF1uKbXrzKlAP9sns)
+![](../../assets/images/posts/how-do-you-build-a-fast-lightweight-solution-for-cqrs-and-event-sourcing/figure-11.png)
 
 The code that relies on a process manager to implement the workflow illustrated above is easy, once you have all the pieces in place:
 
@@ -576,7 +576,7 @@ private void CreatePerson(Guid person, string first, string last)
 
 After that test executes, Bill's blue account has a balance of $31, and Ted's red account has a balance of $169, as expected:
 
-![](https://media.licdn.com/dms/image/v2/D5612AQFVNGYfAU_wfg/article-inline_image-shrink_1500_2232/B56Zec4GvtGQAY-/0/1750683643138?e=1759968000&v=beta&t=rnzwf9kPCsPaMSantvwaY-VyeNG5yqtt0P2Ax05qE-I)
+![](../../assets/images/posts/how-do-you-build-a-fast-lightweight-solution-for-cqrs-and-event-sourcing/figure-12.png)
 
 The code for the money transfer process manager is not too difficult either:
 
@@ -675,7 +675,7 @@ private void CreatePerson(Guid person, string first, string last)
 
 Here is a snapshot from the Visual Studio debugger, looking at the code for the process manager, with a breakpoint on the line that sends the email notification. Notice the body of the message in the popup is what we expect:
 
-![](https://media.licdn.com/dms/image/v2/D5612AQHIXXW8fhOnbg/article-inline_image-shrink_400_744/B56Zec4P2OHoAg-/0/1750683680472?e=1759968000&v=beta&t=g9U75MSQby-wS98sT8H2WU7BjnR9MpTquJ-rxarImlY)
+![](../../assets/images/posts/how-do-you-build-a-fast-lightweight-solution-for-cqrs-and-event-sourcing/figure-14.png)
 
 ### Scenario H: How to Override a Command With a Custom Handler
 
@@ -704,8 +704,8 @@ public class UmbrellaProcessManager
     public void Handle(RenamePerson c)
     {
         // Do nothing. Umbrella does not permit renaming people.
-        
-        // Throw an exception to make the consequences even more severe 
+
+        // Throw an exception to make the consequences even more severe
 		// for any attempt to rename a person...
         // throw new DisallowRenamePersonException();
     }
@@ -730,7 +730,7 @@ public static class Test08
 
 Notice just one event in the log, and no change to the person's name:
 
-![](https://media.licdn.com/dms/image/v2/D5612AQFd5JOhpTGspw/article-inline_image-shrink_400_744/B56Zec4Xf1HUAg-/0/1750683711756?e=1759968000&v=beta&t=nzmmsfnH4a4OW-fDgogkYlPQAeXkOIGz-h4azzDjL0I)
+![](../../assets/images/posts/how-do-you-build-a-fast-lightweight-solution-for-cqrs-and-event-sourcing/figure-15.png)
 
 ## Presentation
 
@@ -746,7 +746,7 @@ The application layer is divided into two distinct parts: a Write side for comma
 
 Notice there are no references to external third-party assemblies here:
 
-![](https://media.licdn.com/dms/image/v2/D5612AQE6eyGv-Kh32A/article-inline_image-shrink_1500_2232/B56Ze.ip8kG0AU-/0/1751248446075?e=1759968000&v=beta&t=5I_o1TeCdo9D5q6xNtPd4Jqw8l6qg3ABP0hJkFlkQQo)
+![](../../assets/images/posts/how-do-you-build-a-fast-lightweight-solution-for-cqrs-and-event-sourcing/figure-16.png)
 
 ### Write Side
 
@@ -845,7 +845,7 @@ public class PersonEventSubscriber
 
     public void Handle(PersonRegistered c)
     {
-        _store.InsertPerson(c.IdentityTenant, c.AggregateIdentifier, 
+        _store.InsertPerson(c.IdentityTenant, c.AggregateIdentifier,
                             c.FirstName + " " + c.LastName, c.Registered);
     }
 
@@ -860,7 +860,7 @@ public class PersonEventSubscriber
 
 The domain contains only aggregates and events. Again, you'll see the list of References here is as bare-metal as possible:
 
-![](https://media.licdn.com/dms/image/v2/D5612AQF-WS96dGJHWA/article-inline_image-shrink_1500_2232/B56Zec4rnwHUAU-/0/1750683794240?e=1759968000&v=beta&t=bMXlasvjTsyK9RZv1kM35nGFIl07K_dAvKQU9LIesWc)
+![](../../assets/images/posts/how-do-you-build-a-fast-lightweight-solution-for-cqrs-and-event-sourcing/figure-17.png)
 
 Each aggregate root class contains a function for each of the commands it accepts as a request to change its state:
 
@@ -936,7 +936,7 @@ At the persistence layer, we begin to see a larger number of dependencies on ext
 -   [System.Data](http://system.data/) for logging commands and events and snapshots in SQL Server using [ADO.NET](http://ado.net/); and
 -   [Entity Framework](https://docs.microsoft.com/en-us/ef) for query projections.
 
-![](https://media.licdn.com/dms/image/v2/D5612AQGrqd_7_7zNoA/article-inline_image-shrink_1500_2232/B56Zec40UUG0AU-/0/1750683829808?e=1759968000&v=beta&t=0RIEBFnMKLSwXR5ittOskq18KPiMriPPG27bKI-XZMo)
+![](../../assets/images/posts/how-do-you-build-a-fast-lightweight-solution-for-cqrs-and-event-sourcing/figure-18.png)
 
 The source code in this project implements a standard run-of-the-mill data access layer, and there should be nothing in this layer that it is new, or especially innovative, or surprising to any experienced developer - so it needs no special discussion.
 
@@ -946,7 +946,7 @@ And at long (_long_) last, ladies and gentlemen, comes the part of the evening y
 
 The funny thing is... now that we have arrived at the nuts and bolts, there should be very little mystery remaining.
 
-![](https://media.licdn.com/dms/image/v2/D5612AQFQRzAa4Aw-Yg/article-inline_image-shrink_1500_2232/B56Ze.iQc6G0AY-/0/1751248341052?e=1759968000&v=beta&t=xiW7p3dERuMMj3uO1BFhare4jonShayuj_VfV3NMdLs)
+![](../../assets/images/posts/how-do-you-build-a-fast-lightweight-solution-for-cqrs-and-event-sourcing/figure-19.png)
 
 The first thing you'll notice is the Timeline assembly has **no** dependencies on external third-party components (besides the .NET Framework itself, obviously).
 
@@ -961,10 +961,10 @@ The Command base class contains properties for the aggregate identifier and vers
 /// Defines the base class for all commands.
 /// </summary>
 /// <remarks>
-/// A command is a request to change the domain. It is always are named with a verb in 
-/// the imperative mood, such as Confirm Order. Unlike an event, a command is not a 
+/// A command is a request to change the domain. It is always are named with a verb in
+/// the imperative mood, such as Confirm Order. Unlike an event, a command is not a
 /// statement of fact; it is only a request, and thus may be refused. Commands are
-/// immutable because their expected usage is to be sent directly to the domain model for 
+/// immutable because their expected usage is to be sent directly to the domain model for
 /// processing. They do not need to change during their projected lifetime.
 /// </remarks>
 public class Command : ICommand
@@ -982,13 +982,13 @@ public class Command : ICommand
 
 The CommandQueue implements the ICommandQueue interface, which defines a small set of methods to register subscribers and overrides, as well as send and schedule commands. You can think of this as the [service bus](https://en.wikipedia.org/wiki/Enterprise_service_bus) for your commands.
 
-![](https://media.licdn.com/dms/image/v2/D5612AQExvnCe922zZg/article-inline_image-shrink_1000_1488/B56Zec5Cq8H8AQ-/0/1750683888571?e=1759968000&v=beta&t=frzx29GNf53oaeGrImIvhEyGFBPsC3HztQI-hzbO3xE)
+![](../../assets/images/posts/how-do-you-build-a-fast-lightweight-solution-for-cqrs-and-event-sourcing/figure-20.png)
 
 ### Events
 
 The Event base class contains properties for the aggregate identifier and version number, as well as properties for the identity of the tenant and user for whom the event was raised/published. This ensures every event log entry is associated with a specific tenant and user.
 
-![](https://media.licdn.com/dms/image/v2/D5612AQG8sxl5IlBjxg/article-inline_image-shrink_1500_2232/B56Ze.hMywHQAU-/0/1751248064187?e=1759968000&v=beta&t=Bl9fT-vHNH24N6B1s0xpBbm5cNv30X6W2TEt9ejfTks)
+![](../../assets/images/posts/how-do-you-build-a-fast-lightweight-solution-for-cqrs-and-event-sourcing/figure-21.png)
 
 You can think of the EventQueue as the service bus for your events.
 
@@ -1000,7 +1000,7 @@ There is one small bit of black magic in the AggregateState class. The Apply met
 /// <summary>
 /// Represents the state (data) of an aggregate. A derived class should be a POCO
 /// (DTO/Packet) that includes a When method for each event type that changes its
-/// property values. Ideally, the property values for an instance of  this class 
+/// property values. Ideally, the property values for an instance of  this class
 /// should be modified only through its When methods.
 /// </summary>
 public abstract class AggregateState
@@ -1027,7 +1027,7 @@ I will close the article with a few basic metrics. (More to come later.)
 
 Here is the analysis report produced by [NDepend](https://www.ndepend.com/) on the Timeline assembly:
 
-![](https://media.licdn.com/dms/image/v2/D5612AQEBWymUYDJDSA/article-inline_image-shrink_1500_2232/B56Zec5Pa7GQAU-/0/1750683940852?e=1759968000&v=beta&t=MbX7ubr-KVfbl13UyDfmLLhA1lFa9jmZf3iCLXnwP14)
+![](../../assets/images/posts/how-do-you-build-a-fast-lightweight-solution-for-cqrs-and-event-sourcing/figure-22.png)
 
 The source code is not perfect, as you can see, but does get an "A" rating, with technical debt estimated at only 1.3%. The project is also very compact, with only 439 lines of code, at the time I write this.
 
@@ -1048,7 +1048,3 @@ The clean architecture approach and emphasis on debuggability make this solution
 Anyone experienced with CQRS+ES implementations can tell you: it's a non-trivial pattern, and there are thousand ways to get it wrong. If you have thoughts, critiques, or questions about my approach — then please feel free to reach out!
 
 #CQRS #EventSourcing #SoftwareArchitecture #DotNet #SoftwareDesign #EnterpriseArchitecture #DomainDrivenDesign #TechLeadership #BackendDevelopment #DeveloperCommunity
-
----
-
-This article was previously posted on LinkedIn: [https://www.linkedin.com/pulse/how-do-you-build-fast-lightweight-solution-cqrs-event-daniel-miller-ymjqc](https://www.linkedin.com/pulse/how-do-you-build-fast-lightweight-solution-cqrs-event-daniel-miller-ymjqc)

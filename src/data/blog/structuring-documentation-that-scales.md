@@ -341,8 +341,4 @@ Whew, that was a much longer article than I planned. If you made it all the way 
 
 If you have indeed read this article from start to finish, then I expect you care about communication, in its written form, as deeply as I do - and I'd welcome your feedback on the structure I have presented.
 
-I'm committed to making the results of our documentation initiative as helpful, accurate, and comprehensive as possible. I'll post updates here on LinkedIn periodically, to let you know how it goes.
-
----
-
-This article was originally posted on LinkedIn: [https://www.linkedin.com/pulse/structuring-documentation-scales-daniel-miller-yyr7c](https://www.linkedin.com/pulse/structuring-documentation-scales-daniel-miller-yyr7c)
+I'm committed to making the results of our documentation initiative as helpful, accurate, and comprehensive as possible. I'll post updates periodically, to let you know how it goes.
